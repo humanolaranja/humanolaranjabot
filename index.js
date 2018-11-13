@@ -26,23 +26,24 @@ const getTitle = (id) => {
   return (temp.length > 0) ? temp[0].title : "";
 }
 
+const getAlternatives = (alternatives) => {
+  let text = `\nAlternativas:\n`;
+  for (let i = 0; i < alternatives.length; i++) {
+    let altname = getTitle(alternatives[i]);
+    text += `/${alternatives[i]} - ${altname}\n`;
+  }
+  return text;
+}
+
 const getItem = (id) => {
-  let item = comidas.filter((comida) => comida.id == id);
-  if(item.length > 0) {
-    item = item[0];
-  }
-  else {
-    return "Desculpe, esse item não existe";
-  }
-  let text = `*${item.title}*`;
-  text += (item.description) ? ` - ${item.description}\n` : '\n';
-  if(item.alternatives.length > 0) {
-    text += `\nAlternativas:\n`;
-    for (let i = 0; i < item.alternatives.length; i++) {
-      let altname = getTitle(item.alternatives[i]);
-      text += `/${item.alternatives[i]} - ${altname}\n`;
-    }
-  }
+  let [item,text] = [comidas.filter((comida) => comida.id == id), "Desculpe, esse item não existe"];
+  if(!item.length) return text; //verifica se o item existe
+  text  = `*${item[0].title}*`;
+  text += (item[0].description) ? ` - ${item[0].description}\n` : '\n';
+  if(item[0].alternatives.length > 0)
+    text += getAlternatives(item[0].alternatives);
+  if(item[0].opcoes.length > 0)
+    text += 'teste';
   return text;
 }
 
