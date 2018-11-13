@@ -1,4 +1,4 @@
-const env = require('dotenv').config().parsed;
+const env = require('dotenv').config({ silent: true }).parsed;
 const http = require('http');
 const port = (process.env.PORT || 5000);
 const Telegraf = require('telegraf');
