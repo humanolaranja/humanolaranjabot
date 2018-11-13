@@ -4,7 +4,7 @@
   "description": "Bot que auxilia no controle alimentar, enviando notificações sobre o que comer em cada refeição, além de informar possíveis substituições.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
