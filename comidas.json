@@ -1,14 +1,29 @@
 [
   {
-    "title":        "Comida 1",
-    "description":  "Teste de comida 1",
-    "when":         "Desjejum",
-    "time":         "08:00"
+    "id": "001",
+    "title":        "10 gotas de própolis",
+    "description":  "",
+    "when":         "☕ Desjejum",
+    "time":         "07:10",
+    "hide":         "0",
+    "alternatives": []
   },
   {
-    "title":        "Comida 2",
-    "description":  "Teste de comida 2",
-    "when":         "Café da Manhã",
-    "time":         "09:00"
+    "id": "002",
+    "title":        "500 ml de chá verde",
+    "description":  "Tomar morno",
+    "when":         "☕ Desjejum",
+    "time":         "07:10",
+    "hide":         "0",
+    "alternatives": ["003"]
+  },
+  {
+    "id": "003",
+    "title":        "1 copo (300 ml) de água morna",
+    "description":  "adicionar 1 limão",
+    "when":         "☕ Desjejum",
+    "time":         "07:10",
+    "hide":         "1",
+    "alternatives": ["002"]
   }
 ]
