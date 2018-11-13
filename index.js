@@ -1,3 +1,5 @@
+const http = require('http');
+const port = (process.env.PORT || 5000);
 const env = require('./.env');
 const Telegraf = require('telegraf');
 const Markup = require('telegraf/markup');
@@ -11,6 +13,13 @@ const tecladoStart = Markup.keyboard([
     ['🍽 Almoço', '🍉 Lanche da tarde'],
     ['💪 Pré treino', '🍛 Jantar']
 ]).resize().extra();
+
+http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.write(JSON.stringify({name: 'HumanoLaranjaBot'}));
+  res.end();
+}).listen(port);
 
 bot.start(async (ctx) => {
   const from = ctx.update.message.from;
