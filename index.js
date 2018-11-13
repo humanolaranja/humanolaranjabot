@@ -1,4 +1,5 @@
-const env = require('dotenv').config({ silent: true }).parsed;
+const env = (process.env.NODE_ENV !== 'production') ? require('dotenv').config().parsed : process.env;
+console.log(env);
 const http = require('http');
 const port = (process.env.PORT || 5000);
 const Telegraf = require('telegraf');
