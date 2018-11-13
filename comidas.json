@@ -20,10 +20,37 @@
   {
     "id": "003",
     "title":        "1 copo (300 ml) de água morna",
-    "description":  "adicionar 1 limão",
+    "description":  "adicionar 1 limão e canela",
     "when":         "☕ Desjejum",
     "time":         "07:10",
     "hide":         "1",
     "alternatives": ["002"]
+  },
+  {
+    "id": "004",
+    "title":        "Omelete",
+    "description":  "2 ovos e 40g de bacon",
+    "when":         "🍳 Café da manhã",
+    "time":         "08:00",
+    "hide":         "0",
+    "alternatives": ["005"]
+  },
+  {
+    "id": "005",
+    "title":        "Panqueca de Banana",
+    "description":  "50g de banana + 10g de farelo de aveia + 1 ovo e 60g de recheio (cottage\/ricota\/queijo frescal\/atum\/frango).",
+    "when":         "🍳 Café da manhã",
+    "time":         "08:00",
+    "hide":         "1",
+    "alternatives": ["004"]
+  },
+  {
+    "id": "006",
+    "title":        "Café",
+    "description":  "Adicionar 1 colher de sopa de óleo de coco ou canela em pó",
+    "when":         "💪 Pré treino",
+    "time":         "17:00",
+    "hide":         "0",
+    "alternatives": []
   }
 ]

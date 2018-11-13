@@ -57,24 +57,17 @@ bot.start(async (ctx) => {
   }
 });
 
-//hears
-bot.hears(/foco/i, (ctx) => ctx.reply('Você consegue! 💪'));
-
-bot.hears('☕ Desjejum', (ctx) => {
-  let desjejum = comidas.filter((comida) => (comida.when == ctx.match && comida.hide == 0));
-    desjejum.forEach(async (item) => {
+bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche da tarde', '💪 Pré treino', '🍛 Jantar'], (ctx) => {
+  let selected = comidas.filter((comida) => (comida.when == ctx.match && comida.hide == 0));
+    selected.forEach(async (item) => {
       await ctx.replyWithMarkdown(getItem(item.id));
     });
-});
-
-bot.hears('🍳 Café da manhã', (ctx) => {
 });
 
 bot.hears(/\/\d{3}/i, async ctx => {
   let id = ctx.match[0].substr(1);
   await ctx.replyWithMarkdown(getItem(id));
 });
-
 
 //commands
 bot.command('about', async ctx => await ctx.reply('Criado por Humano Laranja - http://github.com/humanolaranja/'));
