@@ -42,8 +42,8 @@ const getItem = (id) => {
   text += (item[0].description) ? ` - ${item[0].description}\n` : '\n';
   if(item[0].alternatives.length > 0)
     text += getAlternatives(item[0].alternatives);
-  if(item[0].opcoes.length > 0)
-    text += 'teste';
+  // if(item[0].opcoes.length > 0)
+    // text += 'teste';
   return text;
 }
 
