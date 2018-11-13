@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/humanolaranja/humanolaranjabot/issues"
   },
-  "homepage": "https://github.com/humanolaranja/humanolaranjabot#readme"
+  "homepage": "https://github.com/humanolaranja/humanolaranjabot#readme",
+  "dependencies": {
+    "telegraf": "^3.25.0"
+  }
 }
