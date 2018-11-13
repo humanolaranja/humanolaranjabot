@@ -27,11 +27,10 @@ const getTitle = (id) => {
 }
 
 const getAlternatives = (alternatives) => {
-  let text = `\nAlternativas:\n`;
-  for (let i = 0; i < alternatives.length; i++) {
-    let altname = getTitle(alternatives[i]);
-    text += `/${alternatives[i]} - ${altname}\n`;
-  }
+  let text = '\nAlternativas:\n';
+  alternatives.forEach((alternative) => {
+    text += `/${alternative} - ${getTitle(alternative)}\n`;
+  });
   return text;
 }
 
@@ -42,8 +41,6 @@ const getItem = (id) => {
   text += (item[0].description) ? ` - ${item[0].description}\n` : '\n';
   if(item[0].alternatives.length > 0)
     text += getAlternatives(item[0].alternatives);
-  // if(item[0].opcoes.length > 0)
-    // text += 'teste';
   return text;
 }
 
@@ -60,9 +57,9 @@ bot.start(async (ctx) => {
 
 bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche da tarde', '💪 Pré treino', '🍛 Jantar'], (ctx) => {
   let selected = comidas.filter((comida) => (comida.when == ctx.match && comida.hide == 0));
-    selected.forEach(async (item) => {
-      await ctx.replyWithMarkdown(getItem(item.id));
-    });
+  selected.forEach(async (item) => {
+    await ctx.replyWithMarkdown(getItem(item.id));
+  });
 });
 
 bot.hears(/\/\d{3}/i, async ctx => {
