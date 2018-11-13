@@ -1,0 +1,14 @@
+[
+  {
+    "title":        "Comida 1",
+    "description":  "Teste de comida 1",
+    "when":         "Desjejum",
+    "time":         "08:00"
+  },
+  {
+    "title":        "Comida 2",
+    "description":  "Teste de comida 2",
+    "when":         "Café da Manhã",
+    "time":         "09:00"
+  }
+]
