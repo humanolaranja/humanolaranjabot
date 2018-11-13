@@ -1,0 +1,23 @@
+{
+  "name": "humanolaranjabot",
+  "version": "0.1.0",
+  "description": "Bot que auxilia no controle alimentar, enviando notificações sobre o que comer em cada refeição, além de informar possíveis substituições.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humanolaranja/humanolaranjabot.git"
+  },
+  "keywords": [
+    "bot",
+    "telegram"
+  ],
+  "author": "Humano Laranja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/humanolaranja/humanolaranjabot/issues"
+  },
+  "homepage": "https://github.com/humanolaranja/humanolaranjabot#readme"
+}
