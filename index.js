@@ -1,6 +1,6 @@
+const env = require('dotenv').config().parsed;
 const http = require('http');
 const port = (process.env.PORT || 5000);
-const env = require('./.env');
 const Telegraf = require('telegraf');
 const Markup = require('telegraf/markup');
 const bot = new Telegraf(env.token);
