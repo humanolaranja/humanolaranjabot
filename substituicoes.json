@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Vegetais A",
+    "options": ["Abobrinha", "Agrião", "Alface", "Almeirão", "Berinjela", "Brócolis", "Cebolinha", "Chicória", "Couve", "Couve-flor", "Espinafre", "Jiló", "Palmito", "Pepino", "Pimentão", "Rabanete", "Repolho", "Salsa", "Taioba", "Tomate"],
+    "type": "Vegetais A"
+  },
+  {
+    "title": "Carne Bovina",
+    "options": ["Almôndegas, 4 unidades pequenas", "Bife, 2 unidade grandes"],
+    "type": "Carnes"
+  },
+  {
+    "title": "Peixes",
+    "options": ["Filé, 2 unidades grandes", "Posta, 2 unidades médias"],
+    "type": "Carnes"
+  }
+]
