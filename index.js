@@ -129,6 +129,10 @@ bot.hears(/\/\d{3}/i, async ctx => {
   await ctx.replyWithMarkdown(getItemText(id));
 });
 
+bot.on('text', async ctx => {
+  await ctx.reply('Oi, eu sou o bot do @HumanoLaranja =D');
+});
+
 bot.command('about', async ctx => await ctx.reply('Criado por Humano Laranja - http://github.com/humanolaranja/'));
 
 bot.startPolling();
