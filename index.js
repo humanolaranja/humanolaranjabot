@@ -24,7 +24,7 @@ http.createServer((req, res) => {
 }).listen(port);
 
 setInterval(() => {
-    http.get("http://humanolaranjabot.herokuapp.com/");
+    http.get('http://humanolaranjabot.herokuapp.com/');
 }, 300000);
 
 const getTitle = (id) => {
