@@ -23,6 +23,10 @@ http.createServer((req, res) => {
   res.end();
 }).listen(port);
 
+setInterval(() => {
+    http.get("http://humanolaranjabot.herokuapp.com/");
+}, 300000);
+
 const getTitle = (id) => {
   let temp = comidas.filter((comida) => comida.id == id);
   return (temp.length > 0) ? temp[0].title : "";
