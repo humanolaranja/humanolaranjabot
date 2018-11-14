@@ -79,9 +79,10 @@ const botoesOpcoes = (item) => {
   return (item[0].opcao) ? Extra.markup(Markup.inlineKeyboard([Markup.callbackButton(item[0].opcao, item[0].opcao)], { columns: 1 })) : null;
 }
 
-const notificar = async ({ hour, minute } = trigger) => {
-  let time = `${hour}:${minute}`;
+const notificar = async (date) => {
+  let time = `${date.getHours()}:${date.getMinutes()}`;
   let selected = comidas.filter((comida) => (comida.time == time && comida.hide == 0));
+  console.log(selected);
   if(selected.length > 0) await telegram.sendMessage(env.userId, `É hora desta refeição: ${selected[0].when}`);
   for (let i = 0; i < selected.length; i++) {
     await axios.get(`${env.apiUrl}/sendMessage?chat_id=${env.userId}&text=${encodeURI(getItemText(selected[i].id))}&parse_mode=Markdown`)
@@ -89,12 +90,12 @@ const notificar = async ({ hour, minute } = trigger) => {
   }
 }
 
-const desjejum = new schedule.scheduleJob(triggers.desjejum, notificar(triggers.desjejum));
-const cafe = new schedule.scheduleJob(triggers.cafe, notificar(triggers.cafe));
-const almoco = new schedule.scheduleJob(triggers.almoco, notificar(triggers.almoco));
-const lanche = new schedule.scheduleJob(triggers.lanche, notificar(triggers.lanche));
-const treino = new schedule.scheduleJob(triggers.treino, notificar(triggers.treino));
-const janta = new schedule.scheduleJob(triggers.janta, notificar(triggers.janta));
+const desjejum = new schedule.scheduleJob(triggers.desjejum, (fireDate) => { notificar(fireDate) });
+const cafe = new schedule.scheduleJob(triggers.cafe, (fireDate) => { notificar(fireDate) });
+const almoco = new schedule.scheduleJob(triggers.almoco, (fireDate) => { notificar(fireDate) });
+const lanche = new schedule.scheduleJob(triggers.lanche, (fireDate) => { notificar(fireDate) });
+const treino = new schedule.scheduleJob(triggers.treino, (fireDate) => { notificar(fireDate) });
+const janta = new schedule.scheduleJob(triggers.janta, (fireDate) => { notificar(fireDate) });
 
 bot.start(async (ctx) => {
   const from = ctx.update.message.from;
