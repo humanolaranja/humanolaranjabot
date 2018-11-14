@@ -82,11 +82,11 @@ const botoesOpcoes = (item) => {
 const notificar = async (date) => {
   let time = `${date.getHours()}:${date.getMinutes()}`;
   let selected = comidas.filter((comida) => (comida.time == time && comida.hide == 0));
-  console.log(selected);
   if(selected.length > 0) await telegram.sendMessage(env.userId, `É hora desta refeição: ${selected[0].when}`);
   for (let i = 0; i < selected.length; i++) {
-    await axios.get(`${env.apiUrl}/sendMessage?chat_id=${env.userId}&text=${encodeURI(getItemText(selected[i].id))}&parse_mode=Markdown`)
+    await axios.get(`${env.apiUrl}/sendMessage?chat_id=${env.userId}&text=${encodeURI(getItemText(selected[i].id))}&parse_mode=Markdown&reply_markup=`)
       .catch(e => console.log(e));
+    if(botoesOpcoes(getItem(selected[i].id)) != null) await telegram.sendMessage(env.userId, 'Clique abaixo para ver as opções ⬇', botoesOpcoes(getItem(selected[i].id)));
   }
 }
 
@@ -112,7 +112,8 @@ bot.start(async (ctx) => {
 bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche da tarde', '💪 Pré treino', '🍛 Jantar'], async (ctx) => {
   let selected = comidas.filter((comida) => (comida.when == ctx.match && comida.hide == 0));
   for (let i = 0; i < selected.length; i++) {
-    await ctx.replyWithMarkdown(getItemText(selected[i].id), botoesOpcoes(getItem(selected[i].id)));
+    await ctx.replyWithMarkdown(getItemText(selected[i].id));
+    if(botoesOpcoes(getItem(selected[i].id)) != null) await telegram.sendMessage(env.userId, 'Clique abaixo para ver as opções ⬇', botoesOpcoes(getItem(selected[i].id)));
   }
 });
 
