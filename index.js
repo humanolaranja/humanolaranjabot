@@ -135,4 +135,8 @@ bot.command('stop', async (ctx) => {
   desjejum.cancel(); cafe.cancel(); almoco.cancel(); lanche.cancel(); treino.cancel(); janta.cancel();
 });
 
+bot.on('message', async ctx => {
+  await ctx.reply('Oi, eu sou o bot do @HumanoLaranja =D');
+});
+
 bot.startPolling();
