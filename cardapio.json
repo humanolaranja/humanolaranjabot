@@ -1,0 +1,161 @@
+{
+  "comidas": [
+    {
+      "id": "001",
+      "title":        "10 gotas de própolis",
+      "description":  "",
+      "when":         "☕ Desjejum",
+      "time":         "07:10",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": ""
+    },
+    {
+      "id": "002",
+      "title":        "500 ml de chá verde",
+      "description":  "Tomar morno",
+      "when":         "☕ Desjejum",
+      "time":         "07:10",
+      "hide":         "0",
+      "alternatives": ["003"],
+      "opcao": ""
+    },
+    {
+      "id": "003",
+      "title":        "1 copo (300 ml) de água morna",
+      "description":  "adicionar 1 limão e canela",
+      "when":         "☕ Desjejum",
+      "time":         "07:10",
+      "hide":         "1",
+      "alternatives": ["002"],
+      "opcao": ""
+    },
+    {
+      "id": "004",
+      "title":        "Omelete",
+      "description":  "2 ovos e 40g de bacon",
+      "when":         "🍳 Café da manhã",
+      "time":         "08:00",
+      "hide":         "0",
+      "alternatives": ["005"],
+      "opcao": ""
+    },
+    {
+      "id": "005",
+      "title":        "Panqueca de Banana",
+      "description":  "50g de banana + 10g de farelo de aveia + 1 ovo e 60g de recheio (cottage\/ricota\/queijo frescal\/atum\/frango).",
+      "when":         "🍳 Café da manhã",
+      "time":         "08:00",
+      "hide":         "1",
+      "alternatives": ["004"],
+      "opcao": ""
+    },
+    {
+      "id": "006",
+      "title":        "Café",
+      "description":  "Adicionar 1 colher de sopa de óleo de coco ou canela em pó junto com 5g de BCAA",
+      "when":         "💪 Pré treino",
+      "time":         "17:00",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": ""
+    },
+    {
+      "id": "007",
+      "title":        "Ômega 3",
+      "description":  "1 cápsula",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": ""
+    },
+    {
+      "id": "008",
+      "title":        "Vitamina C",
+      "description":  "1 cápsula",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": ""
+    },
+    {
+      "id": "009",
+      "title":        "Arroz integral ou arroz branco",
+      "description":  "30g",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": ""
+    },
+    {
+      "id": "010",
+      "title":        "Feijão",
+      "description":  "1 concha (50g)",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": ""
+    },
+    {
+      "id": "011",
+      "title":        "1 porção de carne",
+      "description":  "(120 - 150 g)",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": "Carnes"
+    },
+    {
+      "id": "012",
+      "title":        "Vegetal A (Folhas)",
+      "description":  "A vontade",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": "Vegetais A"
+    },
+    {
+      "id": "013",
+      "title":        "Vegetal B (Verduras)",
+      "description":  "3 colheres de sopa (70 g)",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": "Vegetais B"
+    },
+    {
+      "id": "014",
+      "title":        "1 copo (300 ml) de chá verde",
+      "description":  "Beber 10min após a refeição",
+      "when":         "🍽 Almoço",
+      "time":         "12:30",
+      "hide":         "0",
+      "alternatives": [],
+      "opcao": ""
+    }
+  ],
+  "substituicoes": [
+    {
+      "title": "Vegetais A",
+      "options": ["Abobrinha", "Agrião", "Alface", "Almeirão", "Berinjela", "Brócolis", "Cebolinha", "Chicória", "Couve", "Couve-flor", "Espinafre", "Jiló", "Palmito", "Pepino", "Pimentão", "Rabanete", "Repolho", "Salsa", "Taioba", "Tomate"],
+      "type": "Vegetais A"
+    },
+    {
+      "title": "Carne Bovina",
+      "options": ["Almôndegas, 4 unidades pequenas", "Bife, 2 unidade grandes"],
+      "type": "Carnes"
+    },
+    {
+      "title": "Peixes",
+      "options": ["Filé, 2 unidades grandes", "Posta, 2 unidades médias"],
+      "type": "Carnes"
+    }
+  ]
+}

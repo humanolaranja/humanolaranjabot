@@ -10,9 +10,8 @@ const schedule  = require('node-schedule');
 const bot       = new Telegraf(env.token);
 const telegram  = new Telegram(env.token);
 const axios     = require('axios')
-const comidasJson       = fs.readFileSync("comidas.json");
-const substituicoesJson = fs.readFileSync("substituicoes.json");
-const [comidas, substituicoes] = [JSON.parse(comidasJson), JSON.parse(substituicoesJson)];
+const cardapioJson       = fs.readFileSync("comidas.json");
+const cardapio = JSON.parse(cardapioJson);
 const tecladoStart = Markup.keyboard([
     ['☕ Desjejum', '🍳 Café da manhã'],
     ['🍽 Almoço', '🍉 Lanche da tarde'],
@@ -39,7 +38,7 @@ setInterval(() => {
 }, 300000);
 
 const getTitle = (id) => {
-  let temp = comidas.filter((comida) => comida.id == id);
+  let temp = cardapio.comidas.filter((comida) => comida.id == id);
   return (temp.length > 0) ? temp[0].title : "";
 }
 
@@ -60,7 +59,7 @@ const getReplacement = (replacements) => {
 }
 
 const getItemText = (id) => {
-  let [item,text] = [comidas.filter((comida) => comida.id == id), "Desculpe, esse item não existe"];
+  let [item,text] = [cardapio.comidas.filter((comida) => comida.id == id), "Desculpe, esse item não existe"];
   if(!item.length) return text;
   text  = `*${item[0].title}*`;
   text += (item[0].description) ? ` - ${item[0].description}\n` : '\n';
@@ -70,7 +69,7 @@ const getItemText = (id) => {
 }
 
 const getItem = (id) => {
-  let [item,text] = [comidas.filter((comida) => comida.id == id), "Desculpe, esse item não existe"];
+  let [item,text] = [cardapio.comidas.filter((comida) => comida.id == id), "Desculpe, esse item não existe"];
   if(!item.length) return text;
   return item;
 }
@@ -81,7 +80,7 @@ const botoesOpcoes = (item) => {
 
 const notificar = async (date) => {
   let time = `${date.getHours()}:${date.getMinutes()}`;
-  let selected = comidas.filter((comida) => (comida.time == time && comida.hide == 0));
+  let selected = cardapio.comidas.filter((comida) => (comida.time == time && comida.hide == 0));
   if(selected.length > 0) await telegram.sendMessage(env.userId, `É hora desta refeição: ${selected[0].when}`);
   for (let i = 0; i < selected.length; i++) {
     await axios.get(`${env.apiUrl}/sendMessage?chat_id=${env.userId}&text=${encodeURI(getItemText(selected[i].id))}&parse_mode=Markdown&reply_markup=`)
@@ -110,7 +109,7 @@ bot.start(async (ctx) => {
 });
 
 bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche da tarde', '💪 Pré treino', '🍛 Jantar'], async (ctx) => {
-  let selected = comidas.filter((comida) => (comida.when == ctx.match && comida.hide == 0));
+  let selected = cardapio.comidas.filter((comida) => (comida.when == ctx.match && comida.hide == 0));
   for (let i = 0; i < selected.length; i++) {
     await ctx.replyWithMarkdown(getItemText(selected[i].id));
     if(botoesOpcoes(getItem(selected[i].id)) != null) await telegram.sendMessage(env.userId, 'Clique abaixo para ver as opções ⬇', botoesOpcoes(getItem(selected[i].id)));
@@ -118,7 +117,7 @@ bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche 
 });
 
 bot.action(['Vegetais A', 'Vegetais B', 'Carnes'], async (ctx) => {
-  let selected = substituicoes.filter((replacement) => (replacement.type == ctx.match));
+  let selected = cardapio.substituicoes.filter((replacement) => (replacement.type == ctx.match));
   for (let i = 0; i < selected.length; i++) {
     await ctx.replyWithMarkdown(getReplacement(selected[i]));
   }
