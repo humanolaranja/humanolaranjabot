@@ -1,18 +1,18 @@
-const env       = (process.env.NODE_ENV !== 'production') ? require('dotenv').config().parsed : process.env;
-const port      = (process.env.PORT || 5000);
-const Telegraf  = require('telegraf');
-const Telegram  = require('telegraf/telegram');
-const Markup    = require('telegraf/markup');
-const Extra     = require('telegraf/extra');
-const http      = require('http');
-const fs        = require('fs');
-const schedule  = require('node-schedule');
-const bot       = new Telegraf(env.token);
-const telegram  = new Telegram(env.token);
-const axios     = require('axios')
-const cardapioJson       = fs.readFileSync("comidas.json");
-const cardapio = JSON.parse(cardapioJson);
-const tecladoStart = Markup.keyboard([
+const env           = (process.env.NODE_ENV !== 'production') ? require('dotenv').config().parsed : process.env;
+const port          = (process.env.PORT || 5000);
+const Telegraf      = require('telegraf');
+const Telegram      = require('telegraf/telegram');
+const Markup        = require('telegraf/markup');
+const Extra         = require('telegraf/extra');
+const http          = require('http');
+const fs            = require('fs');
+const schedule      = require('node-schedule');
+const bot           = new Telegraf(env.token);
+const telegram      = new Telegram(env.token);
+const axios         = require('axios')
+const cardapioJson  = fs.readFileSync("cardapio.json");
+const cardapio      = JSON.parse(cardapioJson);
+const tecladoStart  = Markup.keyboard([
     ['☕ Desjejum', '🍳 Café da manhã'],
     ['🍽 Almoço', '🍉 Lanche da tarde'],
     ['💪 Pré treino', '🍛 Jantar']
@@ -99,9 +99,9 @@ const janta = new schedule.scheduleJob(triggers.janta, (fireDate) => { notificar
 bot.start(async (ctx) => {
   const from = ctx.update.message.from;
   if(from.id == env.userId) {
-    await ctx.reply(`Seja bem vindo,  ${from.first_name} ${from.last_name}!`);
-    await ctx.reply(`Qual refeição você gostaria de verificar?`, tecladoStart);
-    const replyNotification = ctx.replyWithMarkdown;
+    await ctx.reply(`Seja bem vindo,  ${from.first_name} ${from.last_name}! `);
+    await ctx.reply(`O serviço de notificações foi ativado, caso queira, também é possível fazer uma consulta agora mesmo =D`, tecladoStart);
+    desjejum.nextInvocation(); cafe.nextInvocation(); almoco.nextInvocation(); lanche.nextInvocation(); treino.nextInvocation(); janta.nextInvocation();
   }
   else {
     await ctx.reply(`Desculpe, mas eu fui feito apenas para o @HumanoLaranja`);
@@ -128,10 +128,11 @@ bot.hears(/\/\d{3}/i, async ctx => {
   await ctx.replyWithMarkdown(getItemText(id));
 });
 
-bot.on('text', async ctx => {
-  await ctx.reply('Oi, eu sou o bot do @HumanoLaranja =D');
-});
+bot.command('about', async (ctx) => await ctx.reply('Criado por Humano Laranja - http://github.com/humanolaranja/'));
 
-bot.command('about', async ctx => await ctx.reply('Criado por Humano Laranja - http://github.com/humanolaranja/'));
+bot.command('stop', async (ctx) => {
+  await ctx.reply('As notificações foram paradas, digite /start para iniciar novamente o serviço');
+  desjejum.cancel(); cafe.cancel(); almoco.cancel(); lanche.cancel(); treino.cancel(); janta.cancel();
+});
 
 bot.startPolling();
