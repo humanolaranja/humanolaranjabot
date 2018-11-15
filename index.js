@@ -7,6 +7,7 @@ const Extra         = require('telegraf/extra');
 const http          = require('http');
 const fs            = require('fs');
 const schedule      = require('node-schedule');
+const moment        = require('moment');
 const bot           = new Telegraf(env.token);
 const telegram      = new Telegram(env.token);
 const axios         = require('axios')
@@ -79,7 +80,7 @@ const botoesOpcoes = (item) => {
 }
 
 const notificar = async (date) => {
-  let time = `${date.getHours()}:${date.getMinutes()}`;
+  let time = moment(date).format("HH:mm");
   let selected = cardapio.comidas.filter((comida) => (comida.time == time && comida.hide == 0));
   if(selected.length > 0) await telegram.sendMessage(env.userId, `É hora desta refeição: ${selected[0].when}`);
   for (let i = 0; i < selected.length; i++) {
