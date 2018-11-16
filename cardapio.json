@@ -5,7 +5,6 @@
       "title":        "10 gotas de própolis",
       "description":  "",
       "when":         "☕ Desjejum",
-      "time":         "07:10",
       "hide":         "0",
       "alternatives": [],
       "opcao": ""
@@ -15,7 +14,6 @@
       "title":        "500 ml de chá verde",
       "description":  "Tomar morno",
       "when":         "☕ Desjejum",
-      "time":         "07:10",
       "hide":         "0",
       "alternatives": ["003"],
       "opcao": ""
@@ -25,7 +23,6 @@
       "title":        "1 copo (300 ml) de água morna",
       "description":  "adicionar 1 limão e canela",
       "when":         "☕ Desjejum",
-      "time":         "07:10",
       "hide":         "1",
       "alternatives": ["002"],
       "opcao": ""
@@ -35,7 +32,6 @@
       "title":        "Omelete",
       "description":  "2 ovos e 40g de bacon",
       "when":         "🍳 Café da manhã",
-      "time":         "08:00",
       "hide":         "0",
       "alternatives": ["005"],
       "opcao": ""
@@ -45,7 +41,6 @@
       "title":        "Panqueca de Banana",
       "description":  "50g de banana + 10g de farelo de aveia + 1 ovo e 60g de recheio (cottage\/ricota\/queijo frescal\/atum\/frango).",
       "when":         "🍳 Café da manhã",
-      "time":         "08:00",
       "hide":         "1",
       "alternatives": ["004"],
       "opcao": ""
@@ -55,7 +50,6 @@
       "title":        "Café",
       "description":  "Adicionar 1 colher de sopa de óleo de coco ou canela em pó junto com 5g de BCAA",
       "when":         "💪 Pré treino",
-      "time":         "17:00",
       "hide":         "0",
       "alternatives": [],
       "opcao": ""
@@ -65,7 +59,6 @@
       "title":        "Ômega 3",
       "description":  "1 cápsula",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": ""
@@ -75,7 +68,6 @@
       "title":        "Vitamina C",
       "description":  "1 cápsula",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": ""
@@ -85,7 +77,6 @@
       "title":        "Arroz integral ou arroz branco",
       "description":  "30g",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": ""
@@ -95,7 +86,6 @@
       "title":        "Feijão",
       "description":  "1 concha (50g)",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": ""
@@ -105,7 +95,6 @@
       "title":        "1 porção de carne",
       "description":  "(120 - 150 g)",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": "Carnes"
@@ -115,7 +104,6 @@
       "title":        "Vegetal A (Folhas)",
       "description":  "A vontade",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": "Vegetais A"
@@ -125,7 +113,6 @@
       "title":        "Vegetal B (Verduras)",
       "description":  "3 colheres de sopa (70 g)",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": "Vegetais B"
@@ -135,7 +122,6 @@
       "title":        "1 copo (300 ml) de chá verde",
       "description":  "Beber 10min após a refeição",
       "when":         "🍽 Almoço",
-      "time":         "12:30",
       "hide":         "0",
       "alternatives": [],
       "opcao": ""

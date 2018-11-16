@@ -79,9 +79,8 @@ const botoesOpcoes = (item) => {
   return (item[0].opcao) ? Extra.markup(Markup.inlineKeyboard([Markup.callbackButton(item[0].opcao, item[0].opcao)], { columns: 1 })) : null;
 }
 
-const notificar = async (date) => {
-  let time = moment(date).format("HH:mm");
-  let selected = cardapio.comidas.filter((comida) => (comida.time == time && comida.hide == 0));
+const notificar = async (when) => {
+  let selected = cardapio.comidas.filter((comida) => (comida.when == when && comida.hide == 0));
   if(selected.length > 0) await telegram.sendMessage(env.userId, `É hora desta refeição: ${selected[0].when}`);
   for (let i = 0; i < selected.length; i++) {
     await axios.get(`${env.apiUrl}/sendMessage?chat_id=${env.userId}&text=${encodeURI(getItemText(selected[i].id))}&parse_mode=Markdown&reply_markup=`)
@@ -90,12 +89,12 @@ const notificar = async (date) => {
   }
 }
 
-const desjejum = new schedule.scheduleJob(triggers.desjejum, (fireDate) => { notificar(fireDate) });
-const cafe = new schedule.scheduleJob(triggers.cafe, (fireDate) => { notificar(fireDate) });
-const almoco = new schedule.scheduleJob(triggers.almoco, (fireDate) => { notificar(fireDate) });
-const lanche = new schedule.scheduleJob(triggers.lanche, (fireDate) => { notificar(fireDate) });
-const treino = new schedule.scheduleJob(triggers.treino, (fireDate) => { notificar(fireDate) });
-const janta = new schedule.scheduleJob(triggers.janta, (fireDate) => { notificar(fireDate) });
+const desjejum = new schedule.scheduleJob(triggers.desjejum, () => { notificar('☕ Desjejum') });
+const cafe = new schedule.scheduleJob(triggers.cafe, () => { notificar('🍳 Café da manhã') });
+const almoco = new schedule.scheduleJob(triggers.almoco, () => { notificar('🍽 Almoço') });
+const lanche = new schedule.scheduleJob(triggers.lanche, () => { notificar('🍉 Lanche da tarde') });
+const treino = new schedule.scheduleJob(triggers.treino, () => { notificar('💪 Pré treino') });
+const janta = new schedule.scheduleJob(triggers.janta, () => { notificar('🍛 Jantar') });
 
 bot.start(async (ctx) => {
   const from = ctx.update.message.from;
