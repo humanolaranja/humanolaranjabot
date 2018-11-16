@@ -14,9 +14,9 @@ const axios         = require('axios')
 const cardapioJson  = fs.readFileSync("cardapio.json");
 const cardapio      = JSON.parse(cardapioJson);
 const tecladoStart  = Markup.keyboard([
-    ['☕ Desjejum', '🍳 Café da manhã'],
-    ['🍽 Almoço', '🍉 Lanche da tarde'],
-    ['💪 Pré treino', '🍛 Jantar']
+  ['☕ Desjejum', '🍳 Café da manhã'],
+  ['🍽 Almoço', '🍉 Lanche da tarde'],
+  ['💪 Pré treino', '🍛 Jantar']
 ]).resize().extra();
 const triggers = {
   desjejum: { hour: "07", minute: "10" },
@@ -35,7 +35,7 @@ http.createServer((req, res) => {
 }).listen(port);
 
 setInterval(() => {
-    http.get('http://humanolaranjabot.herokuapp.com/');
+  http.get(env.herokuUrl);
 }, 300000);
 
 const getTitle = (id) => {
@@ -64,8 +64,7 @@ const getItemText = (id) => {
   if(!item.length) return text;
   text  = `*${item[0].title}*`;
   text += (item[0].description) ? ` - ${item[0].description}\n` : '\n';
-  if(item[0].alternatives.length > 0)
-    text += getAlternatives(item[0].alternatives);
+  if(item[0].alternatives.length > 0) text += getAlternatives(item[0].alternatives);
   return text;
 }
 
@@ -83,8 +82,7 @@ const notificar = async (when) => {
   let selected = cardapio.comidas.filter((comida) => (comida.when == when && comida.hide == 0));
   if(selected.length > 0) await telegram.sendMessage(env.userId, `É hora desta refeição: ${selected[0].when}`);
   for (let i = 0; i < selected.length; i++) {
-    await axios.get(`${env.apiUrl}/sendMessage?chat_id=${env.userId}&text=${encodeURI(getItemText(selected[i].id))}&parse_mode=Markdown&reply_markup=`)
-      .catch(e => console.log(e));
+    await axios.get(`${env.apiUrl}/sendMessage?chat_id=${env.userId}&text=${encodeURI(getItemText(selected[i].id))}&parse_mode=Markdown&reply_markup=`);
     if(botoesOpcoes(getItem(selected[i].id)) != null) await telegram.sendMessage(env.userId, 'Clique abaixo para ver as opções ⬇', botoesOpcoes(getItem(selected[i].id)));
   }
 }
@@ -103,9 +101,7 @@ bot.start(async (ctx) => {
     await ctx.reply(`O serviço de notificações foi ativado, caso queira, também é possível fazer uma consulta agora mesmo =D`, tecladoStart);
     desjejum.nextInvocation(); cafe.nextInvocation(); almoco.nextInvocation(); lanche.nextInvocation(); treino.nextInvocation(); janta.nextInvocation();
   }
-  else {
-    await ctx.reply(`Desculpe, mas eu fui feito apenas para o @HumanoLaranja`);
-  }
+  else await ctx.reply(`Desculpe, mas eu fui feito apenas para o @HumanoLaranja`);
 });
 
 bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche da tarde', '💪 Pré treino', '🍛 Jantar'], async (ctx) => {
