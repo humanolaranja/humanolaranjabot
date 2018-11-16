@@ -87,6 +87,13 @@ const notificar = async (when) => {
   }
 }
 
+const verificarUsuario = (ctx, next) => {
+  const mesmoIDMsg = ctx.update.message && ctx.update.message.from.id == env.userId;
+  const mesmoIDCallback = ctx.update.callback_query && ctx.update.callback_query.from.id == env.userId;
+  if (mesmoIDMsg || mesmoIDCallback) next()
+  else ctx.reply(`Desculpe, mas eu fui feito apenas para o @HumanoLaranja`);
+}
+
 const desjejum = new schedule.scheduleJob(triggers.desjejum, () => { notificar('☕ Desjejum') });
 const cafe = new schedule.scheduleJob(triggers.cafe, () => { notificar('🍳 Café da manhã') });
 const almoco = new schedule.scheduleJob(triggers.almoco, () => { notificar('🍽 Almoço') });
@@ -94,17 +101,13 @@ const lanche = new schedule.scheduleJob(triggers.lanche, () => { notificar('🍉
 const treino = new schedule.scheduleJob(triggers.treino, () => { notificar('💪 Pré treino') });
 const janta = new schedule.scheduleJob(triggers.janta, () => { notificar('🍛 Jantar') });
 
-bot.start(async (ctx) => {
-  const from = ctx.update.message.from;
-  if(from.id == env.userId) {
-    await ctx.reply(`Seja bem vindo,  ${from.first_name} ${from.last_name}! `);
-    await ctx.reply(`O serviço de notificações foi ativado, caso queira, também é possível fazer uma consulta agora mesmo =D`, tecladoStart);
-    desjejum.nextInvocation(); cafe.nextInvocation(); almoco.nextInvocation(); lanche.nextInvocation(); treino.nextInvocation(); janta.nextInvocation();
-  }
-  else await ctx.reply(`Desculpe, mas eu fui feito apenas para o @HumanoLaranja`);
+bot.start(verificarUsuario, async (ctx) => {
+  await ctx.reply(`Seja bem vindo,  ${from.first_name} ${from.last_name}! `);
+  await ctx.reply(`O serviço de notificações foi ativado, caso queira, também é possível fazer uma consulta agora mesmo =D`, tecladoStart);
+  desjejum.nextInvocation(); cafe.nextInvocation(); almoco.nextInvocation(); lanche.nextInvocation(); treino.nextInvocation(); janta.nextInvocation();
 });
 
-bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche da tarde', '💪 Pré treino', '🍛 Jantar'], async (ctx) => {
+bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche da tarde', '💪 Pré treino', '🍛 Jantar'], verificarUsuario, async (ctx) => {
   let selected = cardapio.comidas.filter((comida) => (comida.when == ctx.match && comida.hide == 0));
   for (let i = 0; i < selected.length; i++) {
     await ctx.replyWithMarkdown(getItemText(selected[i].id));
@@ -112,21 +115,21 @@ bot.hears(['☕ Desjejum', '🍳 Café da manhã', '🍽 Almoço', '🍉 Lanche 
   }
 });
 
-bot.action(['Vegetais A', 'Vegetais B', 'Carnes'], async (ctx) => {
+bot.action(['Vegetais A', 'Vegetais B', 'Carnes'], verificarUsuario, async (ctx) => {
   let selected = cardapio.substituicoes.filter((replacement) => (replacement.type == ctx.match));
   for (let i = 0; i < selected.length; i++) {
     await ctx.replyWithMarkdown(getReplacement(selected[i]));
   }
 });
 
-bot.hears(/\/\d{3}/i, async ctx => {
+bot.hears(/\/\d{3}/i, verificarUsuario, async ctx => {
   let id = ctx.match[0].substr(1);
   await ctx.replyWithMarkdown(getItemText(id));
 });
 
 bot.command('about', async (ctx) => await ctx.reply('Criado por Humano Laranja - http://github.com/humanolaranja/'));
 
-bot.command('stop', async (ctx) => {
+bot.command('stop', verificarUsuario, async (ctx) => {
   await ctx.reply('As notificações foram paradas, digite /start para iniciar novamente o serviço');
   desjejum.cancel(); cafe.cancel(); almoco.cancel(); lanche.cancel(); treino.cancel(); janta.cancel();
 });
