@@ -90,7 +90,7 @@ const notificar = async (when) => {
 const verificarUsuario = (ctx, next) => {
   const mesmoIDMsg = ctx.update.message && ctx.update.message.from.id == env.userId;
   const mesmoIDCallback = ctx.update.callback_query && ctx.update.callback_query.from.id == env.userId;
-  if (mesmoIDMsg || mesmoIDCallback) next()
+  if (mesmoIDMsg || mesmoIDCallback) next();
   else ctx.reply(`Desculpe, mas eu fui feito apenas para o @HumanoLaranja`);
 }
 
@@ -102,7 +102,7 @@ const treino = new schedule.scheduleJob(triggers.treino, () => { notificar('💪
 const janta = new schedule.scheduleJob(triggers.janta, () => { notificar('🍛 Jantar') });
 
 bot.start(verificarUsuario, async (ctx) => {
-  await ctx.reply(`Seja bem vindo,  ${from.first_name} ${from.last_name}! `);
+  await ctx.reply(`Seja bem vindo,  Humano Laranja! `);
   await ctx.reply(`O serviço de notificações foi ativado, caso queira, também é possível fazer uma consulta agora mesmo =D`, tecladoStart);
   desjejum.nextInvocation(); cafe.nextInvocation(); almoco.nextInvocation(); lanche.nextInvocation(); treino.nextInvocation(); janta.nextInvocation();
 });
