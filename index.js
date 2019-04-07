@@ -38,6 +38,8 @@ setInterval(() => {
   http.get(env.herokuUrl);
 }, 300000);
 
+var notify = true;
+
 const getTitle = (id) => {
   let temp = cardapio.comidas.filter((comida) => comida.id == id);
   return (temp.length > 0) ? temp[0].title : "";
@@ -94,16 +96,26 @@ const verificarUsuario = (ctx, next) => {
   else ctx.reply(`Desculpe, mas eu fui feito apenas para o @HumanoLaranja`);
 }
 
-const desjejum = new schedule.scheduleJob(triggers.desjejum, () => { notificar('☕ Desjejum') });
-const cafe = new schedule.scheduleJob(triggers.cafe, () => { notificar('🍳 Café da manhã') });
-const almoco = new schedule.scheduleJob(triggers.almoco, () => { notificar('🍽 Almoço') });
-const lanche = new schedule.scheduleJob(triggers.lanche, () => { notificar('🍉 Lanche da tarde') });
-const treino = new schedule.scheduleJob(triggers.treino, () => { notificar('💪 Pré treino') });
-const janta = new schedule.scheduleJob(triggers.janta, () => { notificar('🍛 Jantar') });
+var desjejum;
+var cafe;
+var almoco;
+var lanche;
+var treino;
+var janta;
+
+if(notify) {
+  desjejum = new schedule.scheduleJob(triggers.desjejum, () => { notificar('☕ Desjejum') });
+  cafe = new schedule.scheduleJob(triggers.cafe, () => { notificar('🍳 Café da manhã') });
+  almoco = new schedule.scheduleJob(triggers.almoco, () => { notificar('🍽 Almoço') });
+  lanche = new schedule.scheduleJob(triggers.lanche, () => { notificar('🍉 Lanche da tarde') });
+  treino = new schedule.scheduleJob(triggers.treino, () => { notificar('💪 Pré treino') });
+  janta = new schedule.scheduleJob(triggers.janta, () => { notificar('🍛 Jantar') });
+}
 
 bot.start(verificarUsuario, async (ctx) => {
   await ctx.reply(`Seja bem vindo,  Humano Laranja! `);
   await ctx.reply(`O serviço de notificações foi ativado, caso queira, também é possível fazer uma consulta agora mesmo =D`, tecladoStart);
+  notify = true;
   desjejum.nextInvocation(); cafe.nextInvocation(); almoco.nextInvocation(); lanche.nextInvocation(); treino.nextInvocation(); janta.nextInvocation();
 });
 
@@ -130,6 +142,7 @@ bot.hears(/\/\d{3}/i, verificarUsuario, async ctx => {
 bot.command('about', async (ctx) => await ctx.reply('Criado por Humano Laranja - http://github.com/humanolaranja/'));
 
 bot.command('stop', verificarUsuario, async (ctx) => {
+  notify = false;
   await ctx.reply('As notificações foram paradas, digite /start para iniciar novamente o serviço');
   desjejum.cancel(); cafe.cancel(); almoco.cancel(); lanche.cancel(); treino.cancel(); janta.cancel();
 });
